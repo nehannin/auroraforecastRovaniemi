@@ -1,0 +1,99 @@
+:root{
+  --bg:#0a0f1a;
+  --text:#E6F3EE;
+  --card-border:rgba(255,255,255,0.12);
+  --card-bg1:rgba(255,255,255,0.04);
+  --card-bg2:rgba(255,255,255,0.02);
+  --aurora1:#B3FFDA; --aurora2:#7CF8FF; --aurora3:#C39BFF;
+}
+
+/* Background gradient + starfield */
+.stApp {
+  background:
+    radial-gradient(1200px 700px at 20% -10%, rgba(100,255,210,0.12), transparent 60%),
+    radial-gradient(900px 600px at 80% -20%, rgba(185,99,255,0.08), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+.stApp::before, .stApp::after {
+  content:"";
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+}
+.stApp::before {
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.9) 60%, transparent 61%),
+    radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,0.6) 60%, transparent 61%),
+    radial-gradient(1.5px 1.5px at 70% 30%, rgba(255,255,255,0.8) 60%, transparent 61%),
+    radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,0.7) 60%, transparent 61%),
+    radial-gradient(1px 1px at 45% 50%, rgba(255,255,255,0.6) 60%, transparent 61%);
+  animation: twinkle 10s linear infinite alternate; opacity: .6;
+}
+.stApp::after {
+  background-image:
+    radial-gradient(1px 1px at 20% 10%, rgba(255,255,255,0.7) 60%, transparent 61%),
+    radial-gradient(1.5px 1.5px at 60% 20%, rgba(255,255,255,0.8) 60%, transparent 61%),
+    radial-gradient(1px 1px at 75% 75%, rgba(255,255,255,0.6) 60%, transparent 61%),
+    radial-gradient(1px 1px at 40% 85%, rgba(255,255,255,0.8) 60%, transparent 61%);
+  animation: twinkle 14s ease-in-out infinite alternate; opacity: .45;
+}
+@keyframes twinkle { from { opacity:.35 } to { opacity:.9 } }
+.block-container { position: relative; z-index: 1; padding-top: .6rem; }
+
+/* Title — animated aurora gradient */
+.aurora-title {
+  text-align: center;
+  font-size: clamp(36px, 7vw, 60px);
+  line-height: 1.05; font-weight: 900; letter-spacing: .4px;
+  background: linear-gradient(120deg, var(--aurora1) 0%, var(--aurora2) 35%, var(--aurora3) 70%, var(--aurora1) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: auroraShift 10s ease-in-out infinite;
+  text-shadow: 0 0 18px rgba(80,255,200,0.22);
+  margin: 0 0 6px 0;
+}
+@keyframes auroraShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+.aurora-caption { text-align: center; opacity: .85; margin-bottom: 14px; font-size: 15px; }
+
+/* Cards / hero */
+.card {
+  background: linear-gradient(180deg, var(--card-bg1), var(--card-bg2));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  padding: 12px 14px;
+}
+.hero {
+  padding: 18px 22px;
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  background:
+    radial-gradient(1200px 600px at 20% -30%, rgba(120,255,200,0.08), transparent 65%),
+    radial-gradient(900px 600px at 80% -40%, rgba(180,120,255,0.06), transparent 60%),
+    rgba(10,15,26,0.38);
+  margin-top: 6px;
+}
+.hero .title { font-weight: 900; font-size: clamp(22px, 4.5vw, 34px); margin: 0; }
+.hero .percent { font-weight: 900; font-size: clamp(30px, 6.5vw, 48px); margin: 6px 0 0 0; }
+.hero .sub { opacity: .9; margin-top: 8px; }
+
+/* Pills */
+.pill {
+  display:inline-block; margin-left: 8px; padding: 2px 8px;
+  border-radius: 999px; font-size: 12px; font-weight: 700;
+  background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Buttons */
+div.stButton > button {
+  background: linear-gradient(135deg, #1ED69A, #14B8A6);
+  border: 0; color: #041014; font-weight: 800;
+  padding: 10px 18px; border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(20,184,166,0.25);
+  margin-top: 6px;
+}
+div.stButton > button:hover { filter: brightness(1.05); }
+
+/* Dark inputs */
+.stDateInput, .stTimeInput, .stSlider, .stSelectbox, .stNumberInput { color-scheme: dark; }
