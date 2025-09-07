@@ -49,8 +49,6 @@ SITE_DEFAULT = "Vikaköngäs Rapids 🌑"  # typically darkest of the three
 
 # Data loaders (cached)
 @st.cache_resource(show_spinner=False)
-# --- UUSI JA PAREMPI KOODI ---
-@st.cache_resource(show_spinner=False)
 def load_model_and_features(path: str):
     """Load trained model and its required features list (cached)."""
     if not os.path.exists(path):
@@ -65,9 +63,6 @@ def load_model_and_features(path: str):
         st.error("Failed to load model artefact.")
         st.exception(e)
         st.stop()
-# --- KOODIN LOPPU ---
-
-model, FEATURES = load_model_and_features(MODEL_PATH)
 
 @st.cache_data(show_spinner=False)
 def load_features_csv():
@@ -258,6 +253,8 @@ do_predict = predict_clicked or st.session_state.pred_once
 if do_predict:
     st.session_state.pred_once = False
 
+    model, FEATURES = load_model_and_features(MODEL_PATH)
+
     # 1) Base features & model probability (space weather)
     X, meta = get_features(selected_utc_hour)
     # model ja FEATURES already done
@@ -403,17 +400,17 @@ if do_predict:
 
     # 11) Plan B if NO-GO
     if not go:
-        st.markdown("### What to do in Rovaniemi if aurora is unlikely?")
+        st.markdown("### What to do in Rovaniemi if the aurora is unlikely?")
         ideas = [
-            "❄️ **Arktikum** — science centre & museum.",
-            "🌲 **Ounasvaara** — short evening hike with city views.",
-            "🔥 **Sauna + cold plunge** — riverside sauna experiences.",
-            "🎅 **Santa Claus Village** — evening stroll & souvenirs.",
-            "☕ **Café stop** — pulla + coffee in the city centre.",
+            "❄️ Visit **Arktikum** — a science center and museum.",
+            "🌲 Head to **Ounasvaara** for an evening hike with city views.",
+            "🔥 Warm up with a **Sauna + Cold Plunge** for a classic riverside sauna experience.",
+            "🎅 Take an evening stroll at the **Santa Claus Village** and find some unique souvenirs.",
+            "☕ Enjoy a **Café Stop** for traditional cinnamon bun and coffee in the city center.",
         ]
         st.markdown("\n".join(f"- {x}" for x in ideas))
 
 # Footer
 if not os.environ.get("MAPBOX_API_KEY"):
     st.caption("Tip: set MAPBOX_API_KEY for a richer basemap.")
-st.caption("
+st.caption("Thesis demo • RandomForest (space weather) × cloud cover → local visibility • heatmap + GO/NO-GO")

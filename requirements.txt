@@ -1,7 +1,7 @@
-streamlit>=1.36
-pandas>=2.1
-numpy>=1.26
-scikit-learn>=1.3
-joblib>=1.3
-pydeck>=0.9
-# If you run Python < 3.9, add: backports.zoneinfo
+streamlit
+pandas
+numpy
+scikit-learn
+joblib
+pydeck
+plotly

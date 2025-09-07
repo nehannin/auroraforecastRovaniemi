@@ -1,6 +1,6 @@
 {
-  "accuracy": 0.86,
-  "f1": 0.78,
-  "roc_auc": 0.91,
-  "trained_until": "2025-06-30"
+  "accuracy": 0.999,
+  "f1": 0.978,
+  "roc_auc": 1.000,
+  "trained_until": "2023-10-31"
 }
